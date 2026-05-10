@@ -1,0 +1,442 @@
+#Подключение библиотек
+from PyQt5.Qt import *
+from PyQt5 import QtCore, QtGui, QtWidgets
+from fractions import Fraction
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(1105, 773)
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(12)
+        MainWindow.setFont(font)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setSpacing(10)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+
+        # Блок выбора типа соединения
+        self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
+        self.groupBox.setMinimumSize(QtCore.QSize(240, 0))
+        self.groupBox.setObjectName("groupBox")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.groupBox)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setContentsMargins(-1, -1, -1, 0)
+        self.verticalLayout.setSpacing(12)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.radioButton = QtWidgets.QRadioButton(self.groupBox)
+        self.radioButton.setObjectName("radioButton")
+        self.verticalLayout.addWidget(self.radioButton)
+        self.radioButton_2 = QtWidgets.QRadioButton(self.groupBox)
+        self.radioButton_2.setObjectName("radioButton_2")
+        self.verticalLayout.addWidget(self.radioButton_2)
+        self.radioButton_3 = QtWidgets.QRadioButton(self.groupBox)
+        self.radioButton_3.setObjectName("radioButton_3")
+        self.verticalLayout.addWidget(self.radioButton_3)
+        self.verticalLayout_2.addLayout(self.verticalLayout)
+        self.horizontalLayout.addWidget(self.groupBox)
+
+        # Блок ввода толщины фланцев и выбора масштаба
+        self.formLayout = QtWidgets.QFormLayout()
+        self.formLayout.setContentsMargins(-1, 28, -1, -1)
+        self.formLayout.setSpacing(6)
+        self.formLayout.setObjectName("formLayout")
+        self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_2.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.lineEdit_2)
+        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.lineEdit.setObjectName("lineEdit")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.lineEdit)
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setObjectName("label_2")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_2)
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setObjectName("label")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label)
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setObjectName("label_4")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_4)
+        self.comboBox = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.comboBox)
+        self.horizontalLayout.addLayout(self.formLayout)
+
+        # Кнопка расчёта
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_4.setContentsMargins(-1, 40, -1, 40)
+        self.verticalLayout_4.setSpacing(0)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.setMinimumSize(QtCore.QSize(100, 50))
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.verticalLayout_4.addWidget(self.pushButton_2)
+        self.horizontalLayout.addLayout(self.verticalLayout_4)
+
+        # Блок вывода характеристик
+        self.groupBox_2 = QtWidgets.QGroupBox(self.centralwidget)
+        self.groupBox_2.setMinimumSize(QtCore.QSize(358, 120))
+        self.groupBox_2.setMaximumSize(QtCore.QSize(295, 16777215))
+        self.groupBox_2.setObjectName("groupBox_2")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.groupBox_2)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.textBrowser = QtWidgets.QTextBrowser(self.groupBox_2)
+        self.textBrowser.setMinimumSize(QtCore.QSize(200, 100))
+        self.textBrowser.setObjectName("textBrowser")
+        self.verticalLayout_3.addWidget(self.textBrowser)
+        self.horizontalLayout.addWidget(self.groupBox_2)
+        self.verticalLayout_5.addLayout(self.horizontalLayout)
+
+        # Область для отрисовки чертежа
+        self.graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
+        self.graphicsView.setMinimumSize(QtCore.QSize(800, 450))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 71))
+        brush.setStyle(QtCore.Qt.NoBrush)
+        self.graphicsView.setBackgroundBrush(brush)
+        self.graphicsView.setObjectName("graphicsView")
+        self.verticalLayout_5.addWidget(self.graphicsView)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        # Скрываем неиспользуемые поля
+        self.label.setMaximumSize(0, 0)
+        self.label_2.setMaximumSize(0, 0)
+        self.lineEdit_2.setMaximumSize(0, 0)
+        self.lineEdit.setMaximumSize(0, 0)
+        self.comboBox.setMaximumSize(0, 0)
+        self.label_4.setMaximumSize(0, 0)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "Проектный модуль по расчету резьбовых соединений. Вариант 28"))
+        self.groupBox.setTitle(_translate("MainWindow", "Выберите тип соединения"))
+        self.radioButton.setText(_translate("MainWindow", "Болтовое соединение М18"))
+        self.radioButton_2.setText(_translate("MainWindow", "Винтовое соединение М12"))
+        self.radioButton_3.setText(_translate("MainWindow", "Шпилечное соединение М18"))
+        self.label_2.setText(_translate("MainWindow", "Ф2:"))
+        self.label.setText(_translate("MainWindow", "Ф1:"))
+        self.label_4.setText(_translate("MainWindow", "Масштаб:"))
+        self.comboBox.setItemText(0, _translate("MainWindow", "4"))
+        self.comboBox.setItemText(1, _translate("MainWindow", "6"))
+        self.comboBox.setItemText(2, _translate("MainWindow", "8"))
+        self.pushButton_2.setText(_translate("MainWindow", "Рассчитать и начертить"))
+        self.groupBox_2.setTitle(_translate("MainWindow", "Характеристики соединения"))
+        self.textBrowser.setHtml(_translate("MainWindow",
+            "<p><b>Соловьев С.Н.</b><br>НМТ-151701</p><p>Вариант №28</p>"))
+
+
+class UiGo(QtWidgets.QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.radioButton.toggled.connect(self.boltovoe)
+        self.radioButton_2.toggled.connect(self.vintovoe)
+        self.radioButton_3.toggled.connect(self.shpilechnoe)
+        self.pushButton_2.clicked.connect(self.raschet)
+
+    # Показать поля ввода для болтового соединения
+    def boltovoe(self):
+        self.label.setMaximumSize(50, 50)
+        self.label_2.setMaximumSize(50, 50)
+        self.lineEdit_2.setMaximumSize(100, 100)
+        self.lineEdit.setMaximumSize(100, 100)
+        self.comboBox.setMaximumSize(100, 100)
+        self.label_4.setMaximumSize(100, 100)
+
+    # Показать поля ввода для винтового соединения
+    def vintovoe(self):
+        self.label.setMaximumSize(50, 50)
+        self.lineEdit.setMaximumSize(100, 100)
+        self.label_2.setMaximumSize(0, 0)
+        self.lineEdit_2.setMaximumSize(0, 0)
+        self.comboBox.setMaximumSize(100, 100)
+        self.label_4.setMaximumSize(100, 100)
+
+    # Показать поля ввода для шпилечного соединения
+    def shpilechnoe(self):
+        self.label.setMaximumSize(50, 50)
+        self.lineEdit.setMaximumSize(100, 100)
+        self.label_2.setMaximumSize(0, 0)
+        self.lineEdit_2.setMaximumSize(0, 0)
+        self.comboBox.setMaximumSize(100, 100)
+        self.label_4.setMaximumSize(100, 100)
+
+    # Основной блок расчёта выбранного типа соединения
+    def raschet(self):
+        if self.radioButton_2.isChecked():
+            try:
+                inputa = self.lineEdit.text()
+                a = inputa.replace(',', '.')
+                a = float(Fraction(a))
+            except:
+                pass
+            else:
+                d = 12
+                l = a + 1.5 * d
+                ll = a + 1.5 * d
+                ms = int(self.comboBox.currentText())
+                k = 8
+                D = 18
+                if a <= 0:
+                    QtWidgets.QMessageBox.information(None, 'Ошибка', 'Толщина фланца должна быть больше нуля')
+                elif l < 10:
+                    QtWidgets.QMessageBox.information(None, 'Ошибка', 'Длина винта слишком мала, увеличьте толщину фланца')
+                elif l > 100:
+                    QtWidgets.QMessageBox.information(None, 'Ошибка', 'Длина винта слишком велика, уменьшите толщину фланца')
+                else:
+                    if l <= 10: l = 10
+                    elif l <= 12: l = 12
+                    elif l <= 14: l = 14
+                    elif l <= 16: l = 16
+                    elif l <= 18: l = 18
+                    elif l <= 20: l = 20
+                    elif l <= 22: l = 22
+                    elif l <= 25: l = 25
+                    elif l <= 28: l = 28
+                    elif l <= 30: l = 30
+                    elif l <= 35: l = 35
+                    elif l <= 40: l = 40
+                    elif l <= 45: l = 45
+                    elif l <= 50: l = 50
+                    elif l <= 55: l = 55
+                    elif l <= 60: l = 60
+                    elif l <= 65: l = 65
+                    elif l <= 70: l = 70
+                    elif l <= 75: l = 75
+                    elif l <= 80: l = 80
+                    elif l <= 90: l = 90
+                    elif l <= 100: l = 100
+                    self.textBrowser.setText(f'Длина без ГОСТ: {ll} мм\nДлина по ГОСТ: {l} мм\n---\nВинт М12x{l} ГОСТ 1491-80')
+                    self.draw_vint(a, d, l, ms, k, D)
+
+        elif self.radioButton_3.isChecked():
+            try:
+                inputa = self.lineEdit.text()
+                a = inputa.replace(',', '.')
+                a = float(Fraction(a))
+            except:
+                pass
+            else:
+                d = 18
+                ms = int(self.comboBox.currentText())
+                m = 15.8
+                s = 4
+                S = 27
+                D = 28.7
+                l = a + m + s + 0.3 * d
+                ll = a + m + s + 0.3 * d
+                if a <= 0:
+                    QtWidgets.QMessageBox.information(None, 'Ошибка', 'Толщина фланца должна быть больше нуля')
+                elif l < 35:
+                    QtWidgets.QMessageBox.information(None, 'Ошибка', 'Длина шпильки слишком мала, увеличьте толщину фланца')
+                elif l > 260:
+                    QtWidgets.QMessageBox.information(None, 'Ошибка', 'Длина шпильки слишком велика, уменьшите толщину фланца')
+                else:
+                    if l <= 35: l = 35
+                    elif l <= 38: l = 38
+                    elif l <= 40: l = 40
+                    elif l <= 42: l = 42
+                    elif l <= 45: l = 45
+                    elif l <= 48: l = 48
+                    elif l <= 50: l = 50
+                    elif l <= 55: l = 55
+                    elif l <= 60: l = 60
+                    elif l <= 65: l = 65
+                    elif l <= 70: l = 70
+                    elif l <= 75: l = 75
+                    elif l <= 80: l = 80
+                    elif l <= 85: l = 85
+                    elif l <= 90: l = 90
+                    elif l <= 95: l = 95
+                    elif l <= 100: l = 100
+                    elif l <= 105: l = 105
+                    elif l <= 110: l = 110
+                    elif l <= 115: l = 115
+                    elif l <= 120: l = 120
+                    elif l <= 130: l = 130
+                    elif l <= 140: l = 140
+                    elif l <= 150: l = 150
+                    elif l <= 160: l = 160
+                    elif l <= 170: l = 170
+                    elif l <= 180: l = 180
+                    elif l <= 190: l = 190
+                    elif l <= 200: l = 200
+                    elif l <= 220: l = 220
+                    elif l <= 240: l = 240
+                    elif l <= 260: l = 260
+                    l0 = 0
+                    if l <= 35: l0 = l - 0.5 * d
+                    elif l <= 160: l0 = 24
+                    else: l0 = 32
+                    self.textBrowser.setText(f'Длина без ГОСТ: {ll} мм\nДлина по ГОСТ: {l} мм\n---\nШпилька М{d}x{l} ГОСТ 22032-76\nГайка М{d} ГОСТ 5915-70\nШайба {d} ГОСТ 6402-70')
+                    self.draw_shpil(a, d, l, ms, m, s, S, D, l0)
+
+        elif self.radioButton.isChecked():
+            try:
+                inputa = self.lineEdit.text()
+                inputb = self.lineEdit_2.text()
+                a = inputa.replace(',', '.')
+                a = float(Fraction(a))
+                b = inputb.replace(',', '.')
+                b = float(Fraction(b))
+            except:
+                pass
+            else:
+                d = 18
+                s = 4
+                m = 15.8
+                D = 28.7
+                S = 27
+                l = a + b + s + m + 0.3 * d
+                ll = a + b + s + m + 0.3 * d
+                k = 12
+                e = 24.6
+                ms = int(self.comboBox.currentText())
+                if a <= 0 or b <= 0:
+                    QtWidgets.QMessageBox.information(None, 'Ошибка', 'Толщина фланцев должна быть больше нуля')
+                elif l < 30:
+                    QtWidgets.QMessageBox.information(None, 'Ошибка', 'Длина болта слишком мала, увеличьте толщину фланцев')
+                elif l > 200:
+                    QtWidgets.QMessageBox.information(None, 'Ошибка', 'Длина болта слишком велика, уменьшите толщину фланцев')
+                else:
+                    if l <= 30: l = 30
+                    elif l <= 35: l = 35
+                    elif l <= 40: l = 40
+                    elif l <= 45: l = 45
+                    elif l <= 50: l = 50
+                    elif l <= 55: l = 55
+                    elif l <= 60: l = 60
+                    elif l <= 65: l = 65
+                    elif l <= 70: l = 70
+                    elif l <= 75: l = 75
+                    elif l <= 80: l = 80
+                    elif l <= 90: l = 90
+                    elif l <= 100: l = 100
+                    elif l <= 110: l = 110
+                    elif l <= 120: l = 120
+                    elif l <= 130: l = 130
+                    elif l <= 140: l = 140
+                    elif l <= 150: l = 150
+                    elif l <= 160: l = 160
+                    elif l <= 170: l = 170
+                    elif l <= 180: l = 180
+                    elif l <= 200: l = 200
+                    self.textBrowser.setText(f'Длина без ГОСТ: {ll} мм\nДлина по ГОСТ: {l} мм\n---\nБолт М18х{l} ГОСТ 7798-70\nГайка М18 ГОСТ 5915-70\nШайба 18 ГОСТ 6402-70')
+                    self.draw_bolt(a, b, d, s, m, l, k, e, D, S, ms)
+
+    # Отрисовка винтового соединения
+    def draw_vint(self, a, d, l, ms, k, D):
+        self.scene = QGraphicsScene()
+        self.graphicsView.setScene(self.scene)
+        br = QBrush(Qt.FDiagPattern)
+        br.setColor(QColor('black'))
+        br1 = QBrush(Qt.BDiagPattern)
+        br1.setColor(QColor('black'))
+        self.scene.addRect(0, 35, a * ms, 200, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine)).setBrush(br)
+        self.scene.addRect(0 + a * ms, 35, 35 * 5, 200, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine)).setBrush(br1)
+        self.scene.addRect(0 - k * ms, 135 - D * ms / 2, k * ms, D * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addLine(0 - k * ms, 135, 0 - k * ms + k / 2 * ms, 135, QPen(QColor(0, 100, 0), 5, Qt.DashDotLine))
+        self.scene.addRect(0, 35 + 100 - d * ms / 2, l * ms, d * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        if l < 30:
+            self.scene.addRect(0, 35 + 104 - d * ms / 2, l * ms - 1, d * ms - 9, QPen(QColor(105, 105, 105), 1, Qt.SolidLine))
+        else:
+            self.scene.addRect(l * ms - 1, 35 + 100 - d * ms / 2, 30 * ms * (-1), 4, QPen(QColor(105, 105, 105), 1, Qt.SolidLine))
+            self.scene.addRect(l * ms - 1, 35 + 104 - d * ms / 2 + d * ms - 9, 30 * ms * (-1), 4, QPen(QColor(105, 105, 105), 1, Qt.SolidLine))
+        self.scene.addRect(0 + a * ms + 35 * 5 + 50, 35, 180, 200, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addEllipse((0 + a * ms + 35 * 5 + 50) + 180 / 2 - D * ms / 2, 35 + 200 / 2 - D * ms / 2, D * ms, D * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addLine((0 + a * ms + 35 * 5 + 50) + 180 / 2 - D * ms / 3 + 1, 135 + D * ms / 3, (0 + a * ms + 35 * 5 + 50) + 180 / 2 + D * ms / 3 - 1, 135 - D * ms / 3, QPen(QColor(0, 100, 0), 5, Qt.SolidLine))
+        self.scene.addLine(0 - k * ms - 10, 135, a * ms + 35 * 5 + 5, 135, QPen(QColor(139, 0, 0), 1, Qt.DashDotLine))
+        self.scene.addLine((0 + a * ms + 35 * 5 + 50) - 5, 35 + 200 / 2, (0 + a * ms + 35 * 5 + 50) + 185, 35 + 200 / 2, QPen(QColor(139, 0, 0), 1, Qt.PenStyle.DashDotLine))
+        self.scene.addLine((0 + a * ms + 35 * 5 + 50) + 90, 30, (0 + a * ms + 35 * 5 + 50) + 90, 240, QPen(QColor(139, 0, 0), 1, Qt.PenStyle.DashDotLine))
+
+    # Отрисовка шпилечного соединения
+    def draw_shpil(self, a, d, l, ms, m, s, S, D, l0):
+        self.scene = QGraphicsScene()
+        self.graphicsView.setScene(self.scene)
+        br = QBrush(Qt.FDiagPattern)
+        br.setColor(QColor('black'))
+        br1 = QBrush(Qt.BDiagPattern)
+        br1.setColor(QColor('black'))
+        self.scene.addRect(0, 220, a * ms, 200, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine)).setBrush(QBrush(br))
+        self.scene.addRect(0 + a * ms, 220, 35 * 5, 200, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine)).setBrush(QBrush(br1))
+        self.scene.addRect(0, 320 - d * ms / 2 - 4, a * ms, d * ms + 8, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addRect(0 + (a + d) * ms, 320 - d * ms / 2, (l + d) * ms * (-1), d * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addRect(0 + (a + d) * ms - 1, 320 + 4 - d * ms / 2, (l + d) * ms * (-1) + 1, d * ms - 9, QPen(QColor(105, 105, 105), 1, Qt.PenStyle.SolidLine))
+        self.scene.addRect(0 + (a + d) * ms + 1 + ((l + d) * ms * (-1) - 1) + l0 * ms, 320 - d * ms / 2, (l - l0) * ms, d * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addRect(0, 320 - 7.9 / 2 * ms, s * ms * (-1), 7.9 * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addRect(0 - s * ms, 320 - D * ms / 2, m * ms * (-1), D * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addRect(0 - s * ms, 320 - d * ms / 2, m * ms * (-1), d * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addRect(0 + a * ms + 35 * 5 + 50, 220, 180, 200, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addEllipse((0 + a * ms + 35 * 5 + 50) + 180 / 2 - d * ms / 2, 220 + 200 / 2 - d * ms / 2, d * ms, d * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addEllipse((0 + a * ms + 35 * 5 + 50) + 180 / 2 - d * ms / 2 + 4, 220 + 200 / 2 - d * ms / 2 + 4, d * ms - 9, d * ms - 9, QPen(QColor(105, 105, 105), 1, Qt.PenStyle.SolidLine))
+        self.scene.addLine((0 + a * ms + 35 * 5 + 50) + 180 / 2 - S / 2 * ms, 220 + 200 / 2 - d / 2 * ms, (0 + a * ms + 35 * 5 + 50) + 180 / 2 - S / 2 * ms, 220 + 200 / 2 + d / 2 * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addLine((0 + a * ms + 35 * 5 + 50) + 180 / 2 - S / 2 * ms, 220 + 200 / 2 + d / 2 * ms, (0 + a * ms + 35 * 5 + 50) + 180 / 2, 220 + 200 / 2 + D / 2 * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addLine((0 + a * ms + 35 * 5 + 50) + 180 / 2, 220 + 200 / 2 + D / 2 * ms, (0 + a * ms + 35 * 5 + 50) + 180 / 2 + S / 2 * ms, 220 + 200 / 2 + d / 2 * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addLine((0 + a * ms + 35 * 5 + 50) + 180 / 2 + S / 2 * ms, 220 + 200 / 2 + d / 2 * ms, (0 + a * ms + 35 * 5 + 50) + 180 / 2 + S / 2 * ms, 220 + 200 / 2 - d / 2 * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addLine((0 + a * ms + 35 * 5 + 50) + 180 / 2 + S / 2 * ms, 220 + 200 / 2 - d / 2 * ms, (0 + a * ms + 35 * 5 + 50) + 180 / 2, 220 + 200 / 2 - D / 2 * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addLine((0 + a * ms + 35 * 5 + 50) + 180 / 2, 220 + 200 / 2 - D / 2 * ms, (0 + a * ms + 35 * 5 + 50) + 180 / 2 - S / 2 * ms, 220 + 200 / 2 - d / 2 * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addLine(0 + (a + 10) * ms + (l + 10) * ms * (-1) - 6, 320, 0 + a * ms + 35 * 5 + 5, 320, QPen(QColor(139, 0, 0), 1, Qt.PenStyle.DashDotLine))
+        self.scene.addLine((0 + a * ms + 35 * 5 + 50) - 5, 320, (0 + a * ms + 35 * 5 + 50) + 185, 320, QPen(QColor(139, 0, 0), 1, Qt.PenStyle.DashDotLine))
+        self.scene.addLine((0 + a * ms + 35 * 5 + 50) + 90, 215, (0 + a * ms + 35 * 5 + 50) + 90, 425, QPen(QColor(139, 0, 0), 1, Qt.PenStyle.DashDotLine))
+
+    # Отрисовка болтового соединения
+    def draw_bolt(self, a, b, d, s, m, l, k, e, D, S, ms):
+        self.scene = QGraphicsScene()
+        self.graphicsView.setScene(self.scene)
+        br = QBrush(Qt.FDiagPattern)
+        br.setColor(QColor('black'))
+        br1 = QBrush(Qt.BDiagPattern)
+        br1.setColor(QColor('black'))
+        self.scene.addRect(0, 0, a * ms, 200, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine)).setBrush(br)
+        self.scene.addRect(0 + a * ms, 0, b * ms, 200, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine)).setBrush(br1)
+        self.scene.addRect(0, 0 + 100 - d * ms / 2, l * ms, d * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        if l <= 30:
+            self.scene.addRect(0, 0 + 104 - d * ms / 2, l * ms - 1, d * ms - 9)
+        else:
+            self.scene.addRect(l * ms - 1, 0 + 100 - d * ms / 2, 24 * ms * (-1), 4, QPen(QColor(105, 105, 105), 1, Qt.SolidLine))
+            self.scene.addRect(l * ms - 1, 0 + 104 - d * ms / 2 + d * ms - 9, 24 * ms * (-1), 4, QPen(QColor(105, 105, 105), 1, Qt.SolidLine))
+        self.scene.addRect(0, 0 + 100 - e / 2 * ms, k * ms * (-1), (e - d) / 2 * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addRect(0, 0 + 100 - d * ms // 2, k * ms * (-1), d * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addRect(0, 0 + 100 + e / 2 * ms, k * ms * (-1), (e - d) / 2 * ms * (-1), QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addRect(0 + ms * (a + b + s), 0 + 100 - (D / 2 * ms), m * ms, (D - d) / 2 * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addRect(0 + ms * (a + b + s), 0 + 100 - d * ms / 2, m * ms, d * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addRect(0 + ms * (a + b + s), 0 + 100 + (D / 2 * ms), m * ms, (D - d) / 2 * ms * (-1), QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addRect(0 + a * ms + b * ms, 0 + 100 - ((10 / 2) * ms), s * ms, 10 * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addRect(0 + l * ms + 50, 0, 180, 200, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addEllipse((0 + l * ms + 50) + 180 / 2 - d * ms / 2, 0 + 200 / 2 - d * ms / 2, d * ms, d * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addEllipse((0 + l * ms + 50) + 180 / 2 - d * ms / 2 + 5, 0 + 200 / 2 - d * ms / 2 + 5, d * ms - 11, d * ms - 11)
+        center_x = (0 + l * ms + 50) + 90
+        center_y = 0 + 100
+        hole_w = int(d * ms / 3)
+        hole_h = int(d * ms / 3)
+        self.scene.addEllipse(center_x - hole_w // 2, center_y - hole_h // 2,
+                              hole_w, hole_h, QPen(QColor(0, 100, 0), 2, Qt.PenStyle.SolidLine)).setBrush(QColor(0, 100, 0))
+        self.scene.addLine((0 + l * ms + 50) + 180 / 2 - S / 2 * ms, 0 + 200 / 2 - d / 2 * ms, (0 + l * ms + 50) + 180 / 2 - S / 2 * ms, 0 + 200 / 2 + d / 2 * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addLine((0 + l * ms + 50) + 180 / 2 - S / 2 * ms, 0 + 200 / 2 + d / 2 * ms, (0 + l * ms + 50) + 180 / 2, 0 + 200 / 2 + D / 2 * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addLine((0 + l * ms + 50) + 180 / 2, 0 + 200 / 2 + D / 2 * ms, (0 + l * ms + 50) + 180 / 2 + S / 2 * ms, 0 + 200 / 2 + d / 2 * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addLine((0 + l * ms + 50) + 180 / 2 + S / 2 * ms, 0 + 200 / 2 + d / 2 * ms, (0 + l * ms + 50) + int(180 / 2 + S / 2 * ms), int(0 + 200 / 2 - d / 2 * ms), QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addLine((0 + l * ms + 50) + 180 / 2 + S / 2 * ms, int(0 + 200 / 2 - d / 2 * ms), (0 + l * ms + 50) + 180 / 2, int(0 + 200 / 2 - D / 2 * ms), QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addLine((0 + l * ms + 50) + 180 / 2, 0 + 200 / 2 - D / 2 * ms, (0 + l * ms + 50) + 180 / 2 - S / 2 * ms, 0 + 200 / 2 - d / 2 * ms, QPen(QColor('black'), 2, Qt.PenStyle.SolidLine))
+        self.scene.addLine(0 - (k * ms) - 5, 0 + 100, 0 + ms * l + 5, 0 + 100, QPen(QColor(139, 0, 0), 1, Qt.PenStyle.DashDotLine))
+        self.scene.addLine((0 + l * ms + 50) - 5, 100, (0 + l * ms + 50) + 185, 100, QPen(QColor(139, 0, 0), 1, Qt.PenStyle.DashDotLine))
+        self.scene.addLine((0 + l * ms + 50) + 90, -5, (0 + l * ms + 50) + 90, 205, QPen(QColor(139, 0, 0), 1, Qt.PenStyle.DashDotLine))
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    start_Ui = UiGo()
+    start_Ui.show()
+    sys.exit(app.exec_())
